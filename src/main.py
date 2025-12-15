@@ -18,6 +18,8 @@ import logging
 import os
 
 from dedalus_mcp import MCPServer, tool
+from dedalus_mcp.server import TransportSecuritySettings
+
 from search import GoogleCustomSearch
 from dotenv import load_dotenv
 from typing import List
@@ -29,8 +31,15 @@ load_dotenv()
 for logger_name in ("mcp", "httpx", "uvicorn", "uvicorn.access", "uvicorn.error"):
     logging.getLogger(logger_name).setLevel(logging.CRITICAL)
 
-server = MCPServer("simple-utility-server")
-google = GoogleCustomSearch(api_key=os.getenv("GOOGLE_API_KEY"), search_engine_id=os.getenv("GOOGLE_SEARCH_ENGINE_ID"))
+server = MCPServer(
+    name="linkedin-search-server",
+    http_security=TransportSecuritySettings(enable_dns_rebinding_protection=False)
+)
+
+google = GoogleCustomSearch(
+    api_key=os.getenv("GOOGLE_CUSTOM_SEARCH_API_KEY"),
+    search_engine_id=os.getenv("GOOGLE_CUSTOM_SEARCH_ENGINE_ID")
+)
 
 with server.binding():
     @tool(description="Find LinkedIn profiles by any keyword")
