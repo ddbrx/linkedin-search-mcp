@@ -54,12 +54,13 @@ with server.binding():
 
 async def main() -> None:
     """Start the MCP server on streamable-http transport."""
-    print("🚀 Starting Simple Utility Server...")
+    print("🚀 Starting LinkedIn Search MCP Server...")
     print("📡 Transport: streamable-http")
     print("🔧 Available tools: find_profiles, find_companies")
     print()
-    await server.serve(transport="streamable-http", verbose=False, log_level="critical")
-
+    
+    server.collect(find_profiles, find_companies)
+    await server.serve()
 
 if __name__ == "__main__":
     asyncio.run(main())
