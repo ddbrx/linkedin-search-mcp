@@ -11,5 +11,5 @@ if __name__ == "__main__":
         search_engine_id=os.getenv("GOOGLE_CUSTOM_SEARCH_ENGINE_ID")
     )
 
-    search_results = google.search(query="Palash from Dedalus", substring="linkedin.com/in/")
+    search_results = google.search(query="Vatsal from TaskMind", substring="linkedin.com/in/")
     print(search_results)
