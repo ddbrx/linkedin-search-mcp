@@ -1,8 +1,7 @@
 import logging
 import sys
-from typing import List
 import requests
-from .models import SearchResult
+from models import SearchResult
 
 logging.basicConfig(
     stream=sys.stdout,
@@ -15,7 +14,7 @@ class GoogleCustomSearch:
         self._api_key = api_key
         self._search_engine_id = search_engine_id
 
-    def search(self, query: str, size: int = 10, substring: str = None) -> List[SearchResult]:
+    def search(self, query: str, size: int = 10, substring: str = None) -> list[SearchResult]:
         response_json = self._search_google_impl(
             query=query,
             size=size,

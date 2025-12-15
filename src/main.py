@@ -22,7 +22,6 @@ from dedalus_mcp.server import TransportSecuritySettings
 
 from search import GoogleCustomSearch
 from dotenv import load_dotenv
-from typing import List
 from models import SearchResult
 
 load_dotenv()
@@ -43,12 +42,12 @@ google = GoogleCustomSearch(
 
 with server.binding():
     @tool(description="Find LinkedIn profiles by any keyword")
-    def find_profiles(keyword: str) -> List[SearchResult]:
+    def find_profiles(keyword: str) -> list[SearchResult]:
         search_results = google.search(keyword, substring="linkedin.com/in/")
         return search_results
 
     @tool(description="Find LinkedIn companies by any keyword")
-    def find_companies(keyword: str) -> List[SearchResult]:
+    def find_companies(keyword: str) -> list[SearchResult]:
         search_results = google.search(keyword, substring="linkedin.com/company/")
         return search_results
 
